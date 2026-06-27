@@ -22,10 +22,10 @@ public class DemoApplication {
 	}
 
 	@GetMapping("/conversion")
-	public String getLengthConversion(@RequestParam(value = "param" , defaultValue= "30") Integer param) {
+	public String getLengthConversion(@RequestParam(value = "param" , defaultValue= "1") Integer param) {
 		// int param_length = param;
-		String param_name = "temperature";
-		String param_unit_from = "millimeter";
+		String param_name = "length";
+		String param_unit_from = "meter";
 		String param_unit_to = "centimeter";
 
 		if(param_unit_to.equalsIgnoreCase(param_unit_from)){
@@ -34,25 +34,23 @@ public class DemoApplication {
 
 		switch (param_name.toLowerCase()) {
 			case "length":
-				int length = conversionClass.lengthConversion(param);
+				double length = conversionClass.lengthConversion(param, param_unit_from, param_unit_to);
 				return String.format("length" + length);
 			
 			case "weight":
 
-				int weight = conversionClass.weightConversion(param);
+				double weight = conversionClass.weightConversion(param, param_unit_from, param_unit_to);
 				return String.format("weight"+ weight);
 
 			case "temperature":
 
-				int temp = conversionClass.temperatureConversion(param);
-				// ArrayList<String> temp = conversionClass.printArrayList();
+				double temp = conversionClass.temperatureConversion(param, param_unit_from, param_unit_to);
 				return String.format("temperature" + temp);
 
 			default:
 				break;
 		}
 
-		// return new String();
 		return String.format("Hi");
 
 	}
