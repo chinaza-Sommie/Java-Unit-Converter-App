@@ -37,7 +37,7 @@ public class DemoApplication {
 		System.out.println("unitFrom" + unitFrom);
 		System.out.println("unitTo" + unitTo);
 		if(unitTo.equalsIgnoreCase(unitFrom)){
-			return String.format("both conversion inputs have the same units. Try again");
+			return String.format("both conversion inputs have the same units.Try again");
 		}
 
 		switch (type.toLowerCase()) {
