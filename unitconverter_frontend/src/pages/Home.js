@@ -55,7 +55,7 @@ function Home() {
                 
                 <div className="px-5 py-10">
                     <div className="mb-5">
-                        <label htmlFor="length"> Enter the length to convert</label><br/>
+                        <label htmlFor="length"> Enter the length to convert:</label><br/>
                         <input name="length" type="text" placeholder="Eg: 20" id="length" value={measurementType} 
                         onChange={(e) => {
                             const value = e.target.value;
@@ -67,7 +67,7 @@ function Home() {
                     </div>
 
                     <div className="mb-5">
-                        <label htmlFor="unitsFrom"> Unit to convert from</label>
+                        <label htmlFor="unitsFrom"> Unit to convert from:</label>
                         
                         <select name="unitsFrom" id="unitsFrom" value={unitFrom} onChange={(e) => {setUnitFrom(e.target.value)}}
                         className="border border-[black] py-2 px-3 rounded-md w-[100%] mt-2">
@@ -78,7 +78,7 @@ function Home() {
                     </div>
 
                     <div className="mb-5">
-                        <label htmlFor="unitsTo"> Unit to convert to</label>
+                        <label htmlFor="unitsTo"> Unit to convert to:</label>
                         <select name="unitsTo" id="unitsTo" value={unitTo} onChange={(e) => {setUnitTo(e.target.value)}}
                         className="border border-[black] py-2 px-3 rounded-md w-[100%] mt-2">
                             { lengthUnits.map((lengthunit) => (
