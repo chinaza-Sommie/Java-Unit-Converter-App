@@ -31,6 +31,9 @@ public class ConversionClass {
     }
 
     public double lengthConversion(Integer length, String unit_from, String unit_to){
+        // System.out.println(length);
+        // System.out.println(unit_from);
+        // System.out.println(unit_to);
         if(!lengthToMeters.containsKey(unit_to) || !lengthToMeters.containsKey(unit_from)){
             throw new IllegalArgumentException("invalid unit");
         }

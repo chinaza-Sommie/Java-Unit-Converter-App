@@ -5,8 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 // import java.util.ArrayList;
 @SpringBootApplication
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class DemoApplication {
 
@@ -22,30 +24,36 @@ public class DemoApplication {
 	}
 
 	@GetMapping("/conversion")
-	public String getLengthConversion(@RequestParam(value = "param" , defaultValue= "1") Integer param) {
+	// public String getLengthConversion(@RequestParam(value = "param" , defaultValue= "1") Integer param) {
+	public String getLengthConversion(@RequestParam Integer param_name, @RequestParam String type,
+		@RequestParam String unitFrom, @RequestParam String unitTo
+	) {
 		// int param_length = param;
-		String param_name = "length";
-		String param_unit_from = "meter";
-		String param_unit_to = "centimeter";
-
-		if(param_unit_to.equalsIgnoreCase(param_unit_from)){
-			return String.format("both conversion inputs have the same units. Try again");
+		// String param_name = "length";
+		// String param_unit_from = "meter";
+		// String param_unit_to = "centimeter";
+		System.out.println("param_name" + param_name);
+		System.out.println("type" + type);
+		System.out.println("unitFrom" + unitFrom);
+		System.out.println("unitTo" + unitTo);
+		if(unitTo.equalsIgnoreCase(unitFrom)){
+			return String.format("both conversion inputs have the same units.Try again");
 		}
 
-		switch (param_name.toLowerCase()) {
+		switch (type.toLowerCase()) {
 			case "length":
-				double length = conversionClass.lengthConversion(param, param_unit_from, param_unit_to);
-				return String.format("length" + length);
+				double length = conversionClass.lengthConversion(param_name, unitFrom, unitTo);
+				return String.valueOf(length);
 			
 			case "weight":
 
-				double weight = conversionClass.weightConversion(param, param_unit_from, param_unit_to);
-				return String.format("weight"+ weight);
+				double weight = conversionClass.weightConversion(param_name, unitFrom, unitTo);
+				return String.valueOf(weight);
 
 			case "temperature":
 
-				double temp = conversionClass.temperatureConversion(param, param_unit_from, param_unit_to);
-				return String.format("temperature" + temp);
+				double temp = conversionClass.temperatureConversion(param_name, unitFrom, unitTo);
+				return String.valueOf(temp);
 
 			default:
 				break;
