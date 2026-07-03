@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 // import java.util.ArrayList;
 @SpringBootApplication
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = { "http://localhost:3000", "http://192.168.55.223:3000"})
 @RestController
 public class DemoApplication {
 

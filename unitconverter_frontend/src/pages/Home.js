@@ -1,14 +1,18 @@
 // import logo from './logo.svg';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { lengthUnits } from "../data/dataset";
 
 function Home() {
+    const [currMeasurement, setCurrMeasurement] = useState('length');
     const [measurementType, setMeasurementType] = useState('');
     const [unitFrom, setUnitFrom] = useState(lengthUnits[0]);
     const [unitTo, setUnitTo] = useState(lengthUnits[0]);
     const CONVERSION_URL = "http://localhost:8080/conversion";
     const measurements = ["length", "weight", "temperature"];
 
+    useEffect(()=>{
+        console.log(currMeasurement);
+    });
     const submitUnits = async (e) => {
         e.preventDefault();
         console.log(measurementType)
@@ -44,19 +48,20 @@ function Home() {
                 <div className="flex justify-between bg-[grey]  px-10 text-center rounded-t-lg">
                     {
                         measurements.map((measurement) => (
-                            <div className="text-[18px] text-[white] font-bold py-3 w-[100%] capitalize">  {measurement} </div>
+                            <div className={`text-[18px] font-bold py-3 w-[100%] capitalize
+                                ${currMeasurement === measurement ? "text-[black] bg-white" : "text-[white] hover:bg-gray-500" }`}
+                            onClick={() => setCurrMeasurement(measurement)}> 
+                             {measurement} 
+                            </div>
                         ))
                     }
-                    {/* <div className="text-[18px] text-[black] font-bold bg-white py-3 w-[100%]"> Length </div>
-                    <div className="text-[18px] text-[white] font-bold py-3 w-[100%]">  Weight </div>
-                    <div className="text-[18px] text-[white] font-bold py-3 w-[100%]"> Temperature </div> */}
                 </div>
 
                 
                 <div className="px-5 py-10">
                     <div className="mb-5">
-                        <label htmlFor="length"> Enter the length to convert:</label><br/>
-                        <input name="length" type="text" placeholder="Eg: 20" id="length" value={measurementType} 
+                        <label htmlFor="unitValue"> Enter the {currMeasurement} to convert:</label><br/>
+                        <input name={currMeasurement} type="text" placeholder="Eg: 20" id="unitValue" value={measurementType} 
                         onChange={(e) => {
                             const value = e.target.value;
                             if (/^\d*\.?\d*$/.test(value)) {
@@ -93,6 +98,7 @@ function Home() {
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
   );
