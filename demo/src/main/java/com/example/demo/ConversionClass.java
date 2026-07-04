@@ -24,16 +24,13 @@ public class ConversionClass {
         "pound", 453.59
     );
 
-    private final List<String> tempTograms = Arrays.asList(
+    private final List<String> tempToKelvin = Arrays.asList(
         "celsius", "fahrenheit", "kelvin"
     );
     public ConversionClass(){
     }
 
     public double lengthConversion(Integer length, String unit_from, String unit_to){
-        // System.out.println(length);
-        // System.out.println(unit_from);
-        // System.out.println(unit_to);
         if(!lengthToMeters.containsKey(unit_to) || !lengthToMeters.containsKey(unit_from)){
             throw new IllegalArgumentException("invalid unit");
         }
@@ -49,7 +46,6 @@ public class ConversionClass {
     }
 
     public double convertToTargetUnit(Integer value, String unit_from, String unit_to, Map<String, Double> unitstorage){
-     
         double convertToMeters = value * unitstorage.get(unit_from);
         double convertToTarget = convertToMeters / unitstorage.get(unit_to);
         return convertToTarget;
@@ -57,8 +53,8 @@ public class ConversionClass {
 
 
     public double temperatureConversion(Integer weight, String unit_from, String unit_to){
-        
-        if(!tempTograms.contains(unit_to) || !tempTograms.contains(unit_from)){
+
+        if(!tempToKelvin.contains(unit_to.toLowerCase()) || !tempToKelvin.contains(unit_from.toLowerCase())){
             throw new IllegalArgumentException("invalid unit");
         }
         double convertToKelvin = convertToKelvin(weight, unit_from);
@@ -68,8 +64,8 @@ public class ConversionClass {
     }
 
     public double convertToKelvin(double weight, String unit_from){
-        
-        switch (unit_from) {
+
+        switch (unit_from.toLowerCase()) {
             case "fahrenheit":
                 double FahrenheitToKelvin = (weight - 32) * (5/9) + 273.15;
                 return FahrenheitToKelvin;
@@ -86,16 +82,16 @@ public class ConversionClass {
 
 
     public double convertToTargetTemp(double weight, String unit_to){
-        
-        switch (unit_to) {
-            case "Fahrenheit":
+
+        switch (unit_to.toLowerCase()) {
+            case "fahrenheit":
                 double toFahrenheit = (weight - 273.15) * (9/5) + 32;
                 return toFahrenheit;
-            case "Celsius":
+            case "celsius":
                 double toCelsius = weight - 273.15;
                 return toCelsius;
 
-            case "Kelvin":
+            case "kelvin":
                 return weight;
             default:
                 throw new IllegalArgumentException("Unknown temperature unit");
