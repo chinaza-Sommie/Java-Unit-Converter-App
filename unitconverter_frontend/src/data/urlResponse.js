@@ -8,4 +8,3 @@ export const getUnitResponse = async (unitValue, currMeasurement, unitFrom, unit
     const data = await response.text();
     return data
 }
-
